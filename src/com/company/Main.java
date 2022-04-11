@@ -1,5 +1,6 @@
 package com.company;
 
+import java.io.File;
 import java.util.Scanner;
 
 public class Main {
@@ -10,7 +11,7 @@ public class Main {
         //task3();
         //task4();
         //task5();
-        //task6();
+        task6();
     }
 
 
@@ -80,6 +81,7 @@ public class Main {
         int maxWordIndex = 0;
         int maxWordLength = wordsArray[maxWordIndex].length();
 
+        System.out.println(wordsArray.length); // todo remove whitespaces
         //search max length
         for (int i = maxWordIndex + 1; i < wordsArray.length; i++) {
             if (maxWordLength < wordsArray[i].length()) {
@@ -124,7 +126,7 @@ public class Main {
         System.out.print("Enter message -> ");
         String inputString = enterString();
         byte foundLower = 0;
-        final int CHANGE_INDEX = (int) (Math.random()*9 + 1);
+        final int CHANGE_INDEX = (int) (Math.random() * 9 + 1);
         char[] lowerCaseArray = {'а', 'б', 'в', 'г', 'д', 'е', 'ж', 'з', 'и', 'й', 'к',
                 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х',
                 'ц', 'ч', 'ш', 'щ', 'ъ', 'ы', 'ь', 'э', 'ю', 'я'};
@@ -170,7 +172,7 @@ public class Main {
 
     /**
      * Дано предложение, зашифрованное по правилу, описанному в задании 66. Расшифровать это предложение.
-     * (ргамамроП)
+     * (ргамамро)
      */
     public static void task6() {
         //init
@@ -183,9 +185,17 @@ public class Main {
 
         //decrypting
         for (int i = 0; i < stringToArray.length; i += 2) {
-            outputCharArray[i] = stringToArray[indexOddCounter];
-            if (i + 1 <= stringToArray.length - 1) {
-                outputCharArray[i + 1] = stringToArray[indexEvenCounter];
+            if (stringToArray.length % 2 == 1) {
+                outputCharArray[i] = stringToArray[indexOddCounter];
+                if (i + 1 <= stringToArray.length - 1) {
+                    outputCharArray[i + 1] = stringToArray[indexEvenCounter];
+                    indexEvenCounter++;
+                    indexOddCounter--;
+                }
+            }
+            else {
+                outputCharArray[i] = stringToArray[indexEvenCounter];
+                outputCharArray[i + 1] = stringToArray[indexOddCounter];
                 indexEvenCounter++;
                 indexOddCounter--;
             }
@@ -204,4 +214,3 @@ public class Main {
         return sourceString;
     }
 }
-
